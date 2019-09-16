@@ -1,0 +1,31 @@
+{
+    "name": "lukasz-adamski/laravel-przelewy24",
+    "description": "Przelewy24 payments processor service provider for Laravel framework.",
+    "keywords": ["laravel", "przelewy24", "p24", "framework", "source", "api"],
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Lukasz Adamski"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^6.0",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Adams\\Przelewy24\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Adams\\Przelewy24\\Test\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    }
+}
