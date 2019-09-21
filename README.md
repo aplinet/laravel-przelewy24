@@ -67,3 +67,58 @@ class ExampleController extends Controller
     }
 }
 ```
+
+## Events
+When transaction receiver from this package is enabled (`disable_package_routes` setting) you can listen for predefined events dispatched by default webhook controller:
+- `\Adams\Przelewy24\Events\TransactionReceived::class` - transaction was successfully received (signature is valid). If you don't use automatic verification you need to do it manually to charge prepaid money,
+- `\Adams\Przelewy24\Events\TransactionVerified::class` - transaction was successfully received and verified via provider's API. After dispatching this event, prepaid money is already added to your account.
+
+### Example
+1. Below you can see example code of `TransactionVerified` event listener created by `php artisan make:listener ReceivePayment`:
+```php
+<?php
+
+namespace App\Listeners;
+
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Adams\Przelewy24\Events\TransactionVerified;
+
+class ReceivePayment
+{
+    /**
+     * Create the event listener.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Handle the event.
+     *
+     * @param TransactionVerified $event
+     * @return void
+     */
+    public function handle(TransactionVerified $event)
+    {
+        //
+    }
+}
+```
+
+2. You also need to register new listener in `app/Providers/EventServiceProvider.php` file.
+```php
+/**
+ * The event listener mappings for the application.
+ *
+ * @var array
+ */
+protected $listen = [
+    \Adams\Przelewy24\Events\TransactionVerified::class => [
+        \App\Listeners\ReceivePayment::class,
+    ],
+];
+```
