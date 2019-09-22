@@ -92,7 +92,10 @@ class Transaction extends Model
     {
         parent::fillDefaultAttributes();
 
-        $this->setUrlStatus(route('webhooks.przelewy24'));
+        if (config('przelewy24.package_routes', false)) {
+            $this->setUrlStatus(route('webhook.przelewy24'));
+        }
+        
         $this->setApiVersion(Przelewy24::API_VERSION);
         $this->setEncoding(Przelewy24::ENCODING_UTF_8);
         $this->setLanguage(Przelewy24::LANGUAGE_PL);

@@ -38,7 +38,7 @@ class Przelewy24ServiceProvider extends ServiceProvider
      */
     protected function loadRoutes()
     {
-        if (config('przelewy24.disable_package_routes', false)) {
+        if (config('przelewy24.package_routes', false)) {
             return;
         }
 

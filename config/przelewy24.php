@@ -73,5 +73,5 @@ return [
     |
     */
 
-    'disable_package_routes' => false
+    'package_routes' => false
 ];

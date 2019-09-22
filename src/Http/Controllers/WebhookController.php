@@ -37,7 +37,7 @@ class WebhookController extends Controller
      * @param TransactionRequest $request
      * @return Illuminate\Http\Response
      */
-    public function handleWebhook(TransactionRequest $request)
+    public function handle(TransactionRequest $request)
     {
         event(new TransactionReceived($request));
 
