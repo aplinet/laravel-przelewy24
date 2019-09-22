@@ -22,6 +22,18 @@ Adams\Przelewy24\Przelewy24ServiceProvider::class,
 php artisan vendor:publish --provider="Adams\Przelewy24\Przelewy24ServiceProvider"
 ```
 
+5. If you have `package_routes` setting enabled you need to except `/webhook/przelewy24` route from CSRF verification in `app/Http/Middleware/VerifyCsrfToken.php`:
+```php
+/**
+ * The URIs that should be excluded from CSRF verification.
+ *
+ * @var array
+ */
+protected $except = [
+    '/webhook/przelewy24'
+];
+```
+
 ## Environment
 You can setup these environment variables to configure Przelewy24 API access:
 - `PRZELEWY24_MODE` - Current API mode, by default this value is set to `sandbox` to test implementation. On production you need to set this value to `live`,
@@ -69,7 +81,7 @@ class ExampleController extends Controller
 ```
 
 ## Events
-When transaction receiver from this package is enabled (`disable_package_routes` setting) you can listen for predefined events dispatched by default webhook controller:
+When transaction receiver from this package is enabled (`package_routes` setting) you can listen for predefined events dispatched by default webhook controller:
 - `\Adams\Przelewy24\Events\TransactionReceived::class` - transaction was successfully received (signature is valid). If you don't use automatic verification you need to do it manually to charge prepaid money,
 - `\Adams\Przelewy24\Events\TransactionVerified::class` - transaction was successfully received and verified via provider's API. After dispatching this event, prepaid money is already added to your account.
 
