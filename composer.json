@@ -1,5 +1,5 @@
 {
-    "name": "lukasz-adamski/laravel-przelewy24",
+    "name": "aplinet/laravel-przelewy24",
     "description": "Przelewy24 payments processor service provider for Laravel framework.",
     "keywords": ["laravel", "przelewy24", "p24", "framework", "source", "api"],
     "license": "MIT",
