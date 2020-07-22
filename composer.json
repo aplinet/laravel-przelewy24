@@ -3,8 +3,6 @@
     "description": "Przelewy24 payments processor service provider for Laravel framework.",
     "keywords": ["laravel", "przelewy24", "p24", "framework", "source", "api"],
     "license": "MIT",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "authors": [
         {
             "name": "Lukasz Adamski"
