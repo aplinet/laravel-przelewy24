@@ -10,11 +10,9 @@
 |
 */
 
-Route::namespace('\Adams\Przelewy24\Http\Controllers')->group(function () {
-
-    Route::name('webhook.przelewy24')->post(
+$this->app->router->group(['namespace' => '\Adams\Przelewy24\Http\Controllers'], function () {
+    $this->app->router->post(
         'webhook/przelewy24',
-        'WebhookController@handle'
+        ['as' => 'webhook.przelewy24', 'uses' => 'WebhookController@handle']
     );
-
 });

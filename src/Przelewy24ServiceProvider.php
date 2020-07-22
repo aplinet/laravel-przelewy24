@@ -20,10 +20,6 @@ class Przelewy24ServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            $this->configFilePath() => config_path('przelewy24.php')
-        ], 'config');
-
         $this->loadRoutes();
 
         $this->app->bind('przelewy24', function () {
