@@ -2,8 +2,8 @@
 
 namespace Adams\Przelewy24\Events;
 
+use Illuminate\Http\Request;
 use Illuminate\Queue\SerializesModels;
-use Adams\Przelewy24\Http\Requests\TransactionRequest;
 
 class Event
 {
@@ -56,7 +56,7 @@ class Event
      *
      * @return void
      */
-    public function __construct(TransactionRequest $request)
+    public function __construct(Request $request)
     {
         $this->session_id = $request->get('p24_session_id');
         $this->amount = $request->get('p24_amount');

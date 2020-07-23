@@ -2,15 +2,16 @@
 
 namespace Adams\Przelewy24\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller;
-use Adams\Przelewy24\Facades\Facade as Przelewy24;
+use Illuminate\Support\Facades\Validator;
 use Adams\Przelewy24\TransactionConfirmation;
 use Adams\Przelewy24\Events\TransactionReceived;
 use Adams\Przelewy24\Events\TransactionVerified;
+use Adams\Przelewy24\Facades\Facade as Przelewy24;
 use Adams\Przelewy24\Http\Middleware\AuthorizePrzelewy24Servers;
-use Adams\Przelewy24\Http\Requests\TransactionRequest;
 
-class WebhookController extends Controller 
+class WebhookController extends Controller
 {
     /**
      * Determine that transactions will be verified
@@ -19,7 +20,7 @@ class WebhookController extends Controller
      * @var bool
      */
     protected $verifyTransactions = true;
-    
+
     /**
      * Create new object instance.
      * 
@@ -31,14 +32,35 @@ class WebhookController extends Controller
     }
 
     /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'p24_merchant_id' => 'required|numeric',
+            'p24_pos_id' => 'required|numeric',
+            'p24_session_id' => 'required',
+            'p24_amount' => 'required|numeric',
+            'p24_currency' => 'required',
+            'p24_order_id' => 'required|numeric',
+            'p24_method' => 'required|numeric',
+            'p24_statement' => 'required',
+            'p24_sign' => 'required'
+        ];
+    }
+
+    /**
      * Handle all incoming transaction notifications
      * from provider.
      * 
-     * @param TransactionRequest $request
+     * @param Request $request
      * @return Illuminate\Http\Response
      */
-    public function handle(TransactionRequest $request)
+    public function handle(Request $request)
     {
+        Validator::validate($request->all(), $this->rules());
         event(new TransactionReceived($request));
 
         if ($this->verifyTransactions) {
@@ -51,10 +73,10 @@ class WebhookController extends Controller
     /**
      * Verify received transaction.
      * 
-     * @param TransactionRequest $request
+     * @param Request $request
      * @return void
      */
-    protected function verifyTransaction(TransactionRequest $request)
+    protected function verifyTransaction(Request $request)
     {
         $payload = new TransactionConfirmation();
         $payload->setAttributes(
