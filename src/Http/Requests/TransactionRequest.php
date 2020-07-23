@@ -2,9 +2,9 @@
 
 namespace Adams\Przelewy24\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
-class TransactionRequest extends FormRequest
+class TransactionRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +15,7 @@ class TransactionRequest extends FormRequest
     {
         return true;
     }
-    
+
     /**
      * Get the validation rules that apply to the request.
      *

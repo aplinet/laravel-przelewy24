@@ -2,12 +2,12 @@
 
 namespace Adams\Przelewy24\Events;
 
-use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 use Adams\Przelewy24\Http\Requests\TransactionRequest;
 
 class Event
 {
-    use Dispatchable;
+    use SerializesModels;
 
     /**
      * Unique identifier from the seller's system.
