@@ -2,13 +2,13 @@
 
 namespace Adams\Przelewy24\Http\Controllers;
 
+use Laravel\Lumen\Routing\Controller;
 use Adams\Przelewy24\Facades\Facade as Przelewy24;
 use Adams\Przelewy24\TransactionConfirmation;
 use Adams\Przelewy24\Events\TransactionReceived;
 use Adams\Przelewy24\Events\TransactionVerified;
 use Adams\Przelewy24\Http\Middleware\AuthorizePrzelewy24Servers;
 use Adams\Przelewy24\Http\Requests\TransactionRequest;
-use Illuminate\Routing\Controller;
 
 class WebhookController extends Controller 
 {
