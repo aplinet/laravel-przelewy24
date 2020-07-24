@@ -25,6 +25,9 @@ class Przelewy24ServiceProvider extends ServiceProvider
         $this->app->bind('przelewy24', function () {
             return new Przelewy24();
         });
+        $this->app->bind('przelewy24.api', function () {
+            return new Przelewy24Api();
+        });
     }
 
     /**
@@ -42,7 +45,7 @@ class Przelewy24ServiceProvider extends ServiceProvider
             $this->routesFilePath()
         );
     }
-    
+
     /**
      * Register bindings in the container.
      *
@@ -51,7 +54,8 @@ class Przelewy24ServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            $this->configFilePath(), 'przelewy24'
+            $this->configFilePath(),
+            'przelewy24'
         );
     }
 

@@ -56,13 +56,16 @@ class Event
      *
      * @return void
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request = null)
     {
-        $this->session_id = $request->get('p24_session_id');
-        $this->amount = $request->get('p24_amount');
-        $this->currency = $request->get('p24_currency');
-        $this->order_id = $request->get('p24_order_id');
-        $this->method = $request->get('p24_method');
-        $this->statement = $request->get('p24_statement');
+        if ($request instanceof Request) {
+            $this->session_id = $request->get('p24_session_id');
+            $this->amount = $request->get('p24_amount');
+            $this->currency = $request->get('p24_currency');
+            $this->order_id = $request->get('p24_order_id');
+            $this->method = $request->get('p24_method');
+            $this->statement = $request->get('p24_statement');
+        }
+
     }
 }
