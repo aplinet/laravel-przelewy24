@@ -168,16 +168,24 @@ class Przelewy24Api
      */
     public function getTransaction(string $session_id)
     {
-        return $this->request(
-            'get',
-            '/transaction/by/sessionId/' . $session_id,
-            null,
-            [
-                "400" => "Invalid input data",
-                "401" => "Incorrect authentication",
-                "404" => "Transaction does not exist"
-            ]
-        );
+        try {
+            return $this->request(
+                'get',
+                '/transaction/by/sessionId/' . $session_id,
+                null,
+                [
+                    "400" => "Invalid input data",
+                    "401" => "Incorrect authentication",
+                    "404" => "Transaction does not exist"
+                ]
+            );
+        } catch (\Throwable $th) {
+            if ($th instanceof Przelewy24ApiException && $th->getCode() === 404) {
+                return null;
+            } else {
+                throw $th;
+            }
+        }
     }
 
 
