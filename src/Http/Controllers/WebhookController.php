@@ -3,7 +3,7 @@
 namespace Adams\Przelewy24\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Laravel\Lumen\Routing\Controller;
+use Illuminate\Routing\Controller;
 use Adams\Przelewy24\Facades\Przelewy24;
 use Illuminate\Support\Facades\Validator;
 use Adams\Przelewy24\TransactionConfirmation;

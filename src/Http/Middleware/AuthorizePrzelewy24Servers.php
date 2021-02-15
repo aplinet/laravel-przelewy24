@@ -4,7 +4,7 @@ namespace Adams\Przelewy24\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Adams\Przelewy24\Facades\Facade as Przelewy24;
+use Adams\Przelewy24\Facades\Przelewy24;
 
 class AuthorizePrzelewy24Servers
 {
